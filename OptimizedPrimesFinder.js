@@ -1,7 +1,7 @@
 /*    looks only up to the square root of the number; skips checking the even numbers for primes; skips checking anything evenly divisible by any of the primes smaller than the start of the range.
 
 Purpose:
-Quickly finds all the prime numbers in a given range, by ruling out as many numbers as I can from the division check.  Goal: to quickly find all the primes between 10^12 and 10^13.
+Quickly finds all the prime numbers in a given range, by ruling out as many numbers as I can from the division check.  Goal: to quickly find all the primes up to
 
 Thinking: 
 (1) look through only the known primes for divisors of each number (as all non primes will divide into primes) within the range up to the square root of the number (anything bigger than X^1/2 will have been eliminated by earlier checks for things that might multiply by it) (if Z = Y * X, then when I test Z /Y I am also testin Z / X at the same time, so by there is no need to test Z / Y for Y > Z^1/2...),
@@ -11,7 +11,7 @@ Thinking:
 Optimization Benefit:
 Unoptimized N many candidates must be checked by M many possible divisors (N*N-2, since 1 and N need not be checked)
 Optimized I can check N/2 numbers (skip the evens).  I need only check (0.0x*(N-2))^0.5 numbers (primes up to the square root)  
-compare N*(N-2) against (N/2)*(0.0x*(N-2))^0.5.   ASSUMING 1 in 40 numbers are prime (I know smaller numbers have a greater proportion of primes), yields this chart of how many computations are required.
+compare N*(N-2) against (N/2)*(0.0x*(N-2))^0.5.   ASSUMING about 1 in 20 numbers are prime (it seems smaller numbers have a greater proportion of primes), yields this chart of how many computations are required.
 
 		    sum of  N*(N-2) from 2 up to N		     Sum of (.4*N)*(0.0559*(N-2))^0.5 from 3 up to N //.0559 at 1,000,000.  proportion decreases as the numbers get big + offsets the larger number of divisions per prime
 Question:
